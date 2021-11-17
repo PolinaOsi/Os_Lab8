@@ -79,17 +79,17 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
     }
 
     *count_of_iterations = strtol(argv[2], (char**)NULL, basis);
+    
+     if(!isCorrect(*count_of_iterations, argv[2])) {
+        fprintf(stderr, "Use digits only\n");
+        return ERR_OF_FORM_OF_ARGS;
+    }
 
     if(*count_of_iterations < *count_of_threads) {
         fprintf(stderr, "Too few iterations\n");
         return ERR_OF_NUM_OF_ITERATIONS;
     }
-
-    if(!isCorrect(*count_of_iterations, argv[2])) {
-        fprintf(stderr, "Use digits only\n");
-        return ERR_OF_FORM_OF_ARGS;
-    }
-
+    
     return SUCCESS;
 }
 
