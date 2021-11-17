@@ -8,12 +8,12 @@
 #define SUCCESS 0
 #define max_order_of_threads 5
 #define max_order_of_iterations 8
-#define num_of_args 3
+#define count_of_args 3
 #define min_count_of_thread 1
 #define max_count_of_iterations 1000000000
 #define basis 10
 
-#define ERR_OF_NUM_OF_ARGS 1
+#define ERR_OF_COUNT_OF_ARGS 1
 #define ERR_OF_NUM_OF_THREADS 2
 #define ERR_OF_FORM_OF_ARGS 3
 #define ERR_OF_NUM_OF_ITERATIONS 4
@@ -51,9 +51,9 @@ void* startWork(void* param) {
 }
 
 int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_iterations) {
-    if(argc != num_of_args) {
+    if(argc != count_of_args) {
         fprintf(stderr, "Wrong count of args\n");
-        return ERR_OF_NUM_OF_ARGS;
+        return ERR_OF_COUNT_OF_ARGS;
     }
 
     if(strlen(argv[1]) > max_order_of_threads) {
