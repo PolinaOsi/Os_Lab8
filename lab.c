@@ -122,8 +122,8 @@ int calculateOfPi(int* count_of_threads, int* count_of_iterations, double* pi) {
 
 int main(int argc, char** argv) {
     int number_of_error,
-            count_of_threads,
-            count_of_iterations;
+        count_of_threads,
+        count_of_iterations;
 
     number_of_error = checkOfErrors(argc, argv, &count_of_threads, &count_of_iterations);
     if (number_of_error != SUCCESS) {
