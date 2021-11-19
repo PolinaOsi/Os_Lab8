@@ -13,9 +13,9 @@
 #define basis 10
 
 #define ERR_OF_COUNT_OF_ARGS 1
-#define ERR_OF_NUM_OF_THREADS 2
+#define ERR_OF_COUNT_OF_THREADS 2
 #define ERR_OF_FORM_OF_ARGS 3
-#define ERR_OF_NUM_OF_ITERATIONS 4
+#define ERR_OF_COUNT_OF_ITERATIONS 4
 #define ERR_OF_JOINING_OF_THREAD 5
 
 typedef struct param_of_thread {
@@ -66,26 +66,26 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
 
     if(strlen(argv[1]) > max_order_of_threads) {
         fprintf(stderr, "Too many threads\n");
-        return ERR_OF_NUM_OF_THREADS;
+        return ERR_OF_COUNT_OF_THREADS;
     }
 
     *count_of_threads = strtol(argv[1], NULL, basis);
 
     if(*count_of_threads < min_count_of_thread) {
         fprintf(stderr, "Too few threads\n");
-        return ERR_OF_NUM_OF_THREADS;
+        return ERR_OF_COUNT_OF_THREADS;
     }
 
     if(strlen(argv[2]) > max_order_of_iterations) {
         fprintf(stderr, "Too many iterations\n");
-        return ERR_OF_NUM_OF_ITERATIONS;
+        return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
     *count_of_iterations = strtol(argv[1], NULL, basis);
 
     if(*count_of_iterations < *count_of_threads) {
         fprintf(stderr, "Too few iterations\n");
-        return ERR_OF_NUM_OF_ITERATIONS;
+        return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
     return SUCCESS;
