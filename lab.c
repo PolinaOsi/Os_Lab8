@@ -81,7 +81,7 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
-    *count_of_iterations = strtol(argv[1], NULL, basis);
+    *count_of_iterations = strtol(argv[2], NULL, basis);
 
     if(*count_of_iterations < *count_of_threads) {
         fprintf(stderr, "Too few iterations. The number should be in the range [1, 9999999] and more than the first number.\n");
