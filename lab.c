@@ -57,7 +57,7 @@ void* startWork(void* param) {
 
 int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_iterations) {
     if(argc != count_of_args) {
-        fprintf(stderr, "Wrong count of args\n");
+        fprintf(stderr, "Wrong count of args. It should be 2 positive numbers: count of threads and count of iterations.\n");
         return ERR_OF_COUNT_OF_ARGS;
     }
 
@@ -65,26 +65,26 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
     isCorrectFormOfArgs(argv, 2);
 
     if(strlen(argv[1]) > max_order_of_threads) {
-        fprintf(stderr, "Too many threads\n");
+        fprintf(stderr, "Too many threads. The first number should be in the range [1, 99999].\n");
         return ERR_OF_COUNT_OF_THREADS;
     }
 
     *count_of_threads = strtol(argv[1], NULL, basis);
 
     if(*count_of_threads < min_count_of_thread) {
-        fprintf(stderr, "Too few threads\n");
+        fprintf(stderr, "Too few threads. The first number should be in the range [1, 99999].\n");
         return ERR_OF_COUNT_OF_THREADS;
     }
 
     if(strlen(argv[2]) > max_order_of_iterations) {
-        fprintf(stderr, "Too many iterations\n");
+        fprintf(stderr, "Too many iterations. The second number should be in the range [1, 9999999] and more than the first number.\n");
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
     *count_of_iterations = strtol(argv[1], NULL, basis);
 
     if(*count_of_iterations < *count_of_threads) {
-        fprintf(stderr, "Too few iterations\n");
+        fprintf(stderr, "Too few iterations. The number should be in the range [1, 9999999] and more than the first number.\n");
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
