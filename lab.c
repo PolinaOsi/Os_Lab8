@@ -6,8 +6,8 @@
 #include <ctype.h>
 
 #define SUCCESS 0
-#define max_count_of_threads 99999
-#define max_count_of_iterations 99999999
+#define max_order_of_threads 5
+#define max_order_of_iterations 8
 #define count_of_args 3
 #define min_count_of_thread 1
 #define basis 10
@@ -66,7 +66,7 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
 
     *count_of_threads = strtol(argv[1], NULL, basis);
     
-    if(*count_of_threads > max_count_of_threads) {
+    if(strlen(argv[1]) > max_order_of_threads) {
         fprintf(stderr, "Too many threads. The first number should be in the range [1, 99999].\n");
         return ERR_OF_COUNT_OF_THREADS;
     }
@@ -78,7 +78,7 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
 
     *count_of_iterations = strtol(argv[2], NULL, basis);
     
-    if(*count_of_iterations > max_count_of_iterations) {
+    if(strlen(argv[2]) > max_order_of_iterations) {
         fprintf(stderr, "Too many iterations. The second number should be in the range [1, 99999999] and greater than or equal to first number.\n");
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
