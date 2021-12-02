@@ -9,7 +9,7 @@
 #define count_of_args 3
 #define min_count_of_threads 1
 #define max_count_of_threads 32
-#define max_count_of_iterations 2147473648
+#define max_count_of_iterations 1000000000
 #define basis 10
 
 #define ERR_OF_COUNT_OF_ARGS 1
@@ -79,12 +79,12 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
     *count_of_iterations = strtol(argv[2], NULL, basis);
 
     if(*count_of_iterations > max_count_of_iterations) {
-        fprintf(stderr, "Too many iterations. The second number should be in the range [1, 2147473648] and greater than or equal to first number.\n");
+        fprintf(stderr, "Too many iterations. The second number should be in the range [1, 1000000000] and greater than or equal to first number.\n");
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
     if(*count_of_iterations < *count_of_threads) {
-        fprintf(stderr, "Too few iterations. The second number should be in the range [1, 2147473648] and greater than or equal to first number.\n");
+        fprintf(stderr, "Too few iterations. The second number should be in the range [1, 1000000000] and greater than or equal to first number.\n");
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
