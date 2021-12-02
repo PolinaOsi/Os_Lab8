@@ -8,7 +8,7 @@
 #define SUCCESS 0
 #define count_of_args 3
 #define min_count_of_threads 1
-#define max_count_of_threads 10000
+#define max_count_of_threads 32
 #define max_count_of_iterations 2147473648
 #define basis 10
 
@@ -67,12 +67,12 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
     *count_of_threads = strtol(argv[1], NULL, basis);
 
     if(*count_of_threads > max_count_of_threads) {
-        fprintf(stderr, "Too many threads. The first number should be in the range [1, 10000].\n");
+        fprintf(stderr, "Too many threads. The first number should be in the range [1, 32].\n");
         return ERR_OF_COUNT_OF_THREADS;
     }
 
     if(*count_of_threads < min_count_of_threads) {
-        fprintf(stderr, "Too few threads. The first number should be in the range [1, 10000].\n");
+        fprintf(stderr, "Too few threads. The first number should be in the range [1, 32].\n");
         return ERR_OF_COUNT_OF_THREADS;
     }
 
