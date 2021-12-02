@@ -6,10 +6,10 @@
 #include <ctype.h>
 
 #define SUCCESS 0
-#define max_order_of_threads 5
-#define max_order_of_iterations 8
 #define count_of_args 3
-#define min_count_of_thread 1
+#define min_count_of_threads 1
+#define max_count_of_threads 10000
+#define max_count_of_iterations 2147473648
 #define basis 10
 
 #define ERR_OF_COUNT_OF_ARGS 1
@@ -65,26 +65,26 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
     isCorrectFormOfArgs(argv, 2);
 
     *count_of_threads = strtol(argv[1], NULL, basis);
-    
-    if(strlen(argv[1]) > max_order_of_threads) {
-        fprintf(stderr, "Too many threads. The first number should be in the range [1, 99999].\n");
+
+    if(*count_of_threads > max_count_of_threads) {
+        fprintf(stderr, "Too many threads. The first number should be in the range [1, 10000].\n");
         return ERR_OF_COUNT_OF_THREADS;
     }
 
-    if(*count_of_threads < min_count_of_thread) {
-        fprintf(stderr, "Too few threads. The first number should be in the range [1, 99999].\n");
+    if(*count_of_threads < min_count_of_threads) {
+        fprintf(stderr, "Too few threads. The first number should be in the range [1, 10000].\n");
         return ERR_OF_COUNT_OF_THREADS;
     }
 
     *count_of_iterations = strtol(argv[2], NULL, basis);
-    
-    if(strlen(argv[2]) > max_order_of_iterations) {
-        fprintf(stderr, "Too many iterations. The second number should be in the range [1, 99999999] and greater than or equal to first number.\n");
+
+    if(*count_of_iterations > max_count_of_iterations) {
+        fprintf(stderr, "Too many iterations. The second number should be in the range [1, 2147473648] and greater than or equal to first number.\n");
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
     if(*count_of_iterations < *count_of_threads) {
-        fprintf(stderr, "Too few iterations. The second number should be in the range [1, 99999999] and greater than or equal to first number.\n");
+        fprintf(stderr, "Too few iterations. The second number should be in the range [1, 2147473648] and greater than or equal to first number.\n");
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
@@ -122,8 +122,8 @@ int calculateOfPi(int* count_of_threads, int* count_of_iterations, double* pi) {
 
 int main(int argc, char** argv) {
     int number_of_error,
-        count_of_threads,
-        count_of_iterations;
+            count_of_threads,
+            count_of_iterations;
 
     number_of_error = checkOfErrors(argc, argv, &count_of_threads, &count_of_iterations);
     if (number_of_error != SUCCESS) {
