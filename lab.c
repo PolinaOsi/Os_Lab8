@@ -8,7 +8,7 @@
 #define SUCCESS 0
 #define count_of_args 3
 #define min_count_of_threads 1
-#define max_count_of_threads 32
+#define max_count_of_threads 64
 #define max_count_of_iterations 1000000000
 #define basis 10
 
