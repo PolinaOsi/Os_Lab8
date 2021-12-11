@@ -67,12 +67,12 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
     *count_of_threads = strtol(argv[1], NULL, basis);
 
     if(*count_of_threads > max_count_of_threads) {
-        fprintf(stderr, "Too many threads. The first number should be in the range [1, 32].\n");
+        fprintf(stderr, "Too many threads. The first number should be in the range [1, 64].\n");
         return ERR_OF_COUNT_OF_THREADS;
     }
 
     if(*count_of_threads < min_count_of_threads) {
-        fprintf(stderr, "Too few threads. The first number should be in the range [1, 32].\n");
+        fprintf(stderr, "Too few threads. The first number should be in the range [1, 64].\n");
         return ERR_OF_COUNT_OF_THREADS;
     }
 
