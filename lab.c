@@ -9,7 +9,7 @@
 #define count_of_args 3
 #define min_count_of_threads 1
 #define max_count_of_threads 8
-#define max_count_of_iterations 1000000000
+#define max_count_of_iterations 10000000000
 #define basis 10
 
 #define ERR_OF_COUNT_OF_ARGS 1
@@ -21,7 +21,7 @@
 typedef struct param_of_thread {
     int count_of_threads;
     int number_of_thread;
-    int count_of_iterations;
+    long long count_of_iterations;
     double part_of_pi;
 } param_of_thread;
 
@@ -46,7 +46,7 @@ void* startWork(void* param) {
     param_of_thread* current_param = (param_of_thread*)param;
     double part_of_pi = 0;
 
-    for(int i = current_param->number_of_thread; i < current_param->count_of_iterations; i += current_param->count_of_threads) {
+    for(long long i = current_param->number_of_thread; i < current_param->count_of_iterations; i += current_param->count_of_threads) {
         part_of_pi += 1.0 / (i * 4.0 + 1.0);
         part_of_pi -= 1.0 / (i * 4.0 + 3.0);
     }
@@ -55,7 +55,7 @@ void* startWork(void* param) {
     return param;
 }
 
-int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_iterations) {
+int checkOfErrors(int argc, char** argv, int* count_of_threads, long long* count_of_iterations) {
     if(argc != count_of_args) {
         fprintf(stderr, "Wrong count of args. It should be 2 positive numbers: count of threads and count of iterations.\n");
         return ERR_OF_COUNT_OF_ARGS;
@@ -64,7 +64,7 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
     isCorrectFormOfArgs(argv, 1);
     isCorrectFormOfArgs(argv, 2);
 
-    *count_of_threads = strtol(argv[1], NULL, basis);
+    *count_of_threads = atoll(argv[1]);
 
     if(*count_of_threads > max_count_of_threads) {
         fprintf(stderr, "Too many threads. The first number should be in the range [1, 8].\n");
@@ -76,27 +76,27 @@ int checkOfErrors(int argc, char** argv, int* count_of_threads, int* count_of_it
         return ERR_OF_COUNT_OF_THREADS;
     }
 
-    *count_of_iterations = strtol(argv[2], NULL, basis);
+    *count_of_iterations = atoll(argv[2]);
 
     if(*count_of_iterations > max_count_of_iterations) {
-        fprintf(stderr, "Too many iterations. The second number should be in the range [1, 1000000000] and greater than or equal to first number.\n");
+        fprintf(stderr, "Too many iterations. The second number should be in the range [1, 10000000000] and greater than or equal to first number.\n");
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
     if(*count_of_iterations < *count_of_threads) {
-        fprintf(stderr, "Too few iterations. The second number should be in the range [1, 1000000000] and greater than or equal to first number.\n");
+        fprintf(stderr, "Too few iterations. The second number should be in the range [1, 10000000000] and greater than or equal to first number.\n");
         return ERR_OF_COUNT_OF_ITERATIONS;
     }
 
     return SUCCESS;
 }
 
-int calculateOfPi(int* count_of_threads, int* count_of_iterations, double* pi) {
+int calculateOfPi(int* count_of_threads, long long* count_of_iterations, double* pi) {
     pthread_t threads[*count_of_threads];
     param_of_thread param[*count_of_threads];
     int count_of_created_threads = *count_of_threads;
 
-    for (int i = 0; i < *count_of_threads; i++) {
+    for (long long i = 0; i < *count_of_threads; i++) {
         param[i].count_of_threads = *count_of_threads;
         param[i].number_of_thread = i;
         param[i].count_of_iterations = *count_of_iterations;
@@ -122,8 +122,8 @@ int calculateOfPi(int* count_of_threads, int* count_of_iterations, double* pi) {
 
 int main(int argc, char** argv) {
     int number_of_error,
-            count_of_threads,
-            count_of_iterations;
+            count_of_threads;
+    long long count_of_iterations;
 
     number_of_error = checkOfErrors(argc, argv, &count_of_threads, &count_of_iterations);
     if (number_of_error != SUCCESS) {
