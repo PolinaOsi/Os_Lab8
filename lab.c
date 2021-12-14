@@ -10,7 +10,6 @@
 #define min_count_of_threads 1
 #define max_count_of_threads 8
 #define max_count_of_iterations 10000000000
-#define basis 10
 
 #define ERR_OF_COUNT_OF_ARGS 1
 #define ERR_OF_COUNT_OF_THREADS 2
